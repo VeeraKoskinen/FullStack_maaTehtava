@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios'
+import axios from 'axios';
+import Country from './components/Country';
 
 
 class App extends React.Component {
@@ -45,22 +46,20 @@ class App extends React.Component {
         } else if (list.length === 1) {
             return (
                 <div>
-                    <h2>{list[0].name}     {list[0].nativeName}</h2>
-                    <p>capital: {list[0].capital}</p>
-                    <p>population: {list[0].population}</p>
-                    <img src={list[0].flag} alt="Flag" height="200" width="300"/>
-                </div>    
+                    <Country maa={list[0]} value={true}/> 
+                </div>                
             )
         } else {
             return (
                 <div>
-                    {this.makeFilteredList().map((country) => {
-                        return (
-                            <div key={country.name}>
-                                {country.name}
-                            </div>
-                        )
-                    })} 
+                    {this.makeFilteredList()
+                        .map((country) => {
+                            return (
+                                <div  key={country.name} >
+                                    <Country maa={country} value={false}/>
+                                </div>
+                            )
+                        })} 
                 </div>
             )
         }
